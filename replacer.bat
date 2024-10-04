@@ -1,6 +1,14 @@
 @echo off
 setlocal EnableDelayedExpansion
 
+call :printStr lineToPrint 100 -
+call :multipleEcho 10
+
+@echo %lineToPrint%
+@echo.   Script Start
+@echo %lineToPrint%
+
+call :multipleEcho 3
 
 set "x="
 set "mainDirPath=C:\Program files\"
@@ -23,3 +31,28 @@ Rem for /f %%a in ('findstr /r "%%searchingString%%" "%%folderPath%%*.*"') do (
   Rem  @echo.
 )
 PAUSE
+
+:multipleEcho
+(
+  set "nrOfLoops=%~1"
+  for /L %%e in (1, 1, !nrOfLoops!) do (
+    echo.
+  )
+)
+(
+    exit /b
+)
+
+:printStr
+(
+    set "strLength=%~2"
+    set "returnStr="
+    set "repeatedChar=%~3"
+    for /L %%f in (1, 1, !strLength!) do (
+        set "returnStr=!returnStr!!repeatedChar!"
+    )
+)
+(
+    set "%~1=%returnStr%"
+    exit /b
+)
